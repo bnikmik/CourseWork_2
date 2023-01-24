@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class TaskService {
@@ -23,7 +24,7 @@ public class TaskService {
         taskMap.put(task.getId(), task);
     }
 
-    public Task remove (int id){
+    public Task remove (int id) throws TaskNotFoundExceptions{
         if (taskMap.containsKey(id)) {
             Task tempTask = taskMap.get(id);
             removedTasks.add(tempTask);
@@ -35,6 +36,6 @@ public class TaskService {
     }
 
     public Collection<Task> getAllByDate(LocalDate localDate) {
-        return taskMap.values().stream().filter(task -> task.appearsIn(localDate)).toList();
+        return taskMap.values().stream().filter(task -> task.appearsIn(localDate)).collect(Collectors.toList());
     }
 }

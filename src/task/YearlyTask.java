@@ -12,7 +12,8 @@ public class YearlyTask extends Task {
 
     @Override
     public boolean appearsIn(LocalDate localDate) {
-        return localDate.isAfter(LocalDate.now().minusDays(1))
+        return localDate.isEqual(getDateTime().toLocalDate())
+                || localDate.isAfter(getDateTime().toLocalDate())
                 && localDate.getDayOfMonth() == getDateTime().getDayOfMonth()
                 && localDate.getMonthValue() == getDateTime().getMonthValue();
     }

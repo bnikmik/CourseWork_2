@@ -15,25 +15,25 @@ public class Main {
                 "dailyTask",
                 Type.PERSONAL,
                 "сделай это",
-                LocalDateTime.of(2023,1,24,23,10)
+                LocalDateTime.of(2023, 1, 24, 23, 10)
         );
         OneTimeTask oneTimeTask = new OneTimeTask(
                 "oneTimeTask",
                 Type.PERSONAL,
                 "сделай это",
-                LocalDateTime.of(2022,1,24,13,5)
+                LocalDateTime.of(2023, 1, 26, 19, 5)
         );
         MonthlyTask monthlyTask = new MonthlyTask(
                 "dsad",
                 Type.PERSONAL,
                 "сделай это",
-                LocalDateTime.of(2023,3,24,13,5)
+                LocalDateTime.of(2023, 1, 24, 13, 5)
         );
         YearlyTask yearlyTask = new YearlyTask(
                 "yearlyTask",
                 Type.PERSONAL,
                 "сделай это",
-                LocalDateTime.of(2023,1,24,13,5)
+                LocalDateTime.of(2023, 1, 24, 13, 5)
         );
 
         TaskService taskService = new TaskService();
@@ -48,6 +48,13 @@ public class Main {
             System.out.println("Нельзя удалить! Задачи не существует! ");
         }
 
-        System.out.println(taskService.getAllByDate(LocalDate.of(2022, 1, 24)));
+        System.out.println(oneTimeTask.appearsIn(LocalDate.of(2023, 1, 26)));
+
+//        System.out.println(taskService.getAllByDate(LocalDate.of(2022, 1, 24)));
+
+
+
     }
+
+
 }
