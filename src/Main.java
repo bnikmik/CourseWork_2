@@ -1,4 +1,5 @@
 import enums.Type;
+import exceptions.IncorrectArgumentException;
 import exceptions.TaskNotFoundExceptions;
 import services.TaskService;
 import task.DailyTask;
@@ -23,18 +24,25 @@ public class Main {
                 "сделай это",
                 LocalDateTime.of(2023, 1, 26, 19, 5)
         );
+
         MonthlyTask monthlyTask = new MonthlyTask(
                 "dsad",
                 Type.PERSONAL,
                 "сделай это",
                 LocalDateTime.of(2023, 1, 24, 13, 5)
         );
-        YearlyTask yearlyTask = new YearlyTask(
-                "yearlyTask",
-                Type.PERSONAL,
-                "сделай это",
-                LocalDateTime.of(2023, 1, 24, 13, 5)
-        );
+        YearlyTask yearlyTask = null;
+
+        try {
+            yearlyTask = new YearlyTask(
+                    "",
+                    Type.PERSONAL,
+                    "сделай это",
+                    LocalDateTime.of(2023, 1, 24, 13, 5)
+            );
+        } catch (IncorrectArgumentException e) {
+            System.out.println("Title не должен быть равен: <" + e.getMessage() +">");
+        }
 
         TaskService taskService = new TaskService();
         taskService.add(dailyTask);
@@ -50,7 +58,7 @@ public class Main {
 
         System.out.println(oneTimeTask.appearsIn(LocalDate.of(2023, 1, 26)));
 
-//        System.out.println(taskService.getAllByDate(LocalDate.of(2022, 1, 24)));
+        System.out.println(taskService.getAllByDate(LocalDate.of(2022, 1, 24)));
 
 
 

@@ -47,12 +47,7 @@ public abstract class Task {
         if (title != null && !title.isEmpty() && !title.isBlank()) {
             this.title = title;
         } else {
-            try {
-                throw new IncorrectArgumentException(title);
-            } catch (IncorrectArgumentException e) {
-                e.printStackTrace();
-                this.title = "default title";
-            }
+            throw new IncorrectArgumentException(title);
         }
     }
 

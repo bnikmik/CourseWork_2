@@ -1,6 +1,6 @@
 package exceptions;
 
-public class IncorrectArgumentException extends Exception{
+public class IncorrectArgumentException extends RuntimeException{
     private final String argument;
 
     public IncorrectArgumentException(String argument) {
