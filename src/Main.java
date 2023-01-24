@@ -4,6 +4,7 @@ import services.TaskService;
 import task.DailyTask;
 import task.MonthlyTask;
 import task.OneTimeTask;
+import task.YearlyTask;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ public class Main {
                 "dailyTask",
                 Type.PERSONAL,
                 "сделай это",
-                LocalDateTime.of(2023,1,25,23,10)
+                LocalDateTime.of(2023,1,24,23,10)
         );
         OneTimeTask oneTimeTask = new OneTimeTask(
                 "oneTimeTask",
@@ -26,20 +27,27 @@ public class Main {
                 "dsad",
                 Type.PERSONAL,
                 "сделай это",
-                LocalDateTime.of(2023,4,13,13,5)
+                LocalDateTime.of(2023,3,24,13,5)
+        );
+        YearlyTask yearlyTask = new YearlyTask(
+                "yearlyTask",
+                Type.PERSONAL,
+                "сделай это",
+                LocalDateTime.of(2023,1,24,13,5)
         );
 
         TaskService taskService = new TaskService();
         taskService.add(dailyTask);
         taskService.add(oneTimeTask);
         taskService.add(monthlyTask);
+        taskService.add(yearlyTask);
 
         try {
-            System.out.println(taskService.remove(3));
+            System.out.println(taskService.remove(2));
         } catch (TaskNotFoundExceptions e) {
             System.out.println("Нельзя удалить! Задачи не существует! ");
         }
 
-        System.out.println(taskService.getAllByDate(LocalDate.of(2023, 12, 13)));
+        System.out.println(taskService.getAllByDate(LocalDate.of(2023, 1, 24)));
     }
 }
