@@ -1,7 +1,7 @@
-import enums.Type;
-import exceptions.IncorrectArgumentException;
-import exceptions.TaskNotFoundExceptions;
-import services.TaskService;
+import api.Task;
+import exception.IncorrectArgumentException;
+import exception.TaskNotFoundExceptions;
+import service.TaskService;
 import task.DailyTask;
 import task.MonthlyTask;
 import task.OneTimeTask;
@@ -14,20 +14,20 @@ public class Main {
     public static void main(String[] args) {
         DailyTask dailyTask = new DailyTask(
                 "dailyTask",
-                Type.PERSONAL,
+                Task.Type.PERSONAL,
                 "сделай это",
                 LocalDateTime.of(2023, 1, 24, 23, 10)
         );
         OneTimeTask oneTimeTask = new OneTimeTask(
                 "oneTimeTask",
-                Type.PERSONAL,
+                Task.Type.PERSONAL,
                 "сделай это",
                 LocalDateTime.of(2023, 1, 24, 19, 5)
         );
 
         MonthlyTask monthlyTask = new MonthlyTask(
                 "dsad",
-                Type.PERSONAL,
+                Task.Type.PERSONAL,
                 "сделай это",
                 LocalDateTime.of(2023, 1, 24, 13, 5)
         );
@@ -36,7 +36,7 @@ public class Main {
         try {
             yearlyTask = new YearlyTask(
                     "asd",
-                    Type.PERSONAL,
+                    Task.Type.PERSONAL,
                     "сделай это",
                     LocalDateTime.of(2023, 2, 25, 13, 5)
             );

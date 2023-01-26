@@ -1,6 +1,6 @@
 package task;
 
-import enums.Type;
+import api.Task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

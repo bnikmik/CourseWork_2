@@ -1,13 +1,15 @@
-package task;
+package api;
 
-import enums.Type;
-import exceptions.IncorrectArgumentException;
+import exception.IncorrectArgumentException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public abstract class Task {
+    public enum Type {
+        WORK, PERSONAL
+    }
     private static int idGenerator;
     private String title;
     private final Type type;

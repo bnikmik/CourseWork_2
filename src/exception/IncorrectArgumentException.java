@@ -1,4 +1,4 @@
-package exceptions;
+package exception;
 
 public class IncorrectArgumentException extends RuntimeException{
     private final String argument;

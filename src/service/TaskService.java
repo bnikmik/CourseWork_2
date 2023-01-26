@@ -1,7 +1,7 @@
-package services;
+package service;
 
-import exceptions.TaskNotFoundExceptions;
-import task.Task;
+import exception.TaskNotFoundExceptions;
+import api.Task;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -22,23 +22,33 @@ public class TaskService {
     }
 
     public Task remove(int id) throws TaskNotFoundExceptions {
-        if (taskMap.containsKey(id)) {
-            Task tempTask = taskMap.get(id);
-            removedTasks.add(tempTask);
-            taskMap.remove(id);
-            return tempTask;
+        Task task = taskMap.remove(id);
+        if (task!=null) {
+            removedTasks.add(task);
+            return task;
         } else {
             throw new TaskNotFoundExceptions();
         }
     }
 
     public Collection<Task> getAllByDate(LocalDate localDate) {
-        return taskMap.values().stream().filter(task -> task.appearsIn(localDate)).collect(Collectors.toList());
+        return taskMap.values()
+                .stream()
+                .filter(task -> task.appearsIn(localDate))
+                .collect(Collectors.toList());
     }
 
-    public Map<LocalDate, List<Task>> getAllGroupByDate () {
+    public Map<LocalDate, Collection<Task>> getAllGroupByDate () {
         return taskMap.values().stream()
-                .collect(Collectors.groupingBy(task -> task.getDateTime().toLocalDate()));
+                .collect(Collectors.toMap(task -> task.getDateTime().toLocalDate()
+                        ,task -> {
+                            Collection<Task> tasks = new ArrayList<>();
+                            tasks.add(task);
+                            return tasks;
+                        },(o, o2) -> {
+                            o.addAll(o2);
+                            return o;
+                        }));
     }
 
     public Collection<Task> getRemovedTasks() {

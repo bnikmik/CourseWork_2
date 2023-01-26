@@ -1,11 +1,11 @@
 package task;
 
-import enums.Type;
+import api.Task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class WeeklyTask extends Task{
+public class WeeklyTask extends Task {
     public WeeklyTask(String title, Type type, String description, LocalDateTime dateTime) {
         super(title, type, description, dateTime);
     }
