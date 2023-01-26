@@ -23,7 +23,7 @@ public class TaskService {
 
     public Task remove(int id) throws TaskNotFoundExceptions {
         Task task = taskMap.remove(id);
-        if (task!=null) {
+        if (task != null) {
             removedTasks.add(task);
             return task;
         } else {
@@ -38,25 +38,35 @@ public class TaskService {
                 .collect(Collectors.toList());
     }
 
-    public Map<LocalDate, Collection<Task>> getAllGroupByDate () {
+    public Map<LocalDate, Collection<Task>> getAllGroupByDate() {
         return taskMap.values().stream()
-                .collect(Collectors.toMap(task -> task.getDateTime().toLocalDate()
-                        ,task -> {
-                            Collection<Task> tasks = new ArrayList<>();
-                            tasks.add(task);
-                            return tasks;
-                        },(o, o2) -> {
-                            o.addAll(o2);
-                            return o;
-                        }));
+                .collect(Collectors.toMap(task -> task.getDateTime().toLocalDate(),
+                        task -> {
+                            Collection<Task> taskCollection = new ArrayList<>();
+                            taskCollection.add(task);
+                            return taskCollection;
+                        }, (o1, o2) -> {
+                            o1.addAll(o2);
+                            return o1;
+                        }
+                ));
+        //        return taskMap.values().stream()
+//                .collect(Collectors.groupingBy(task -> task.getDateTime().toLocalDate(),
+//                        Collectors.toCollection(ArrayList::new)));
     }
+
+
+    public Map<LocalDate, List<Task>> getAllGroupByDate2() {
+        return taskMap.values().stream().collect(Collectors.groupingBy(task -> task.getDateTime().toLocalDate()));
+    }
+
 
     public Collection<Task> getRemovedTasks() {
         return new ArrayList<>(removedTasks);
     }
 
     public Task updateTitle(int i, String title) {
-         taskMap.get(i).setTitle(title);
+        taskMap.get(i).setTitle(title);
         return taskMap.get(i);
 
     }
