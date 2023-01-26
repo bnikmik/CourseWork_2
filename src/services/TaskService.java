@@ -4,10 +4,7 @@ import exceptions.TaskNotFoundExceptions;
 import task.Task;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -24,7 +21,7 @@ public class TaskService {
         taskMap.put(task.getId(), task);
     }
 
-    public Task remove (int id) throws TaskNotFoundExceptions{
+    public Task remove(int id) throws TaskNotFoundExceptions {
         if (taskMap.containsKey(id)) {
             Task tempTask = taskMap.get(id);
             removedTasks.add(tempTask);
@@ -37,5 +34,25 @@ public class TaskService {
 
     public Collection<Task> getAllByDate(LocalDate localDate) {
         return taskMap.values().stream().filter(task -> task.appearsIn(localDate)).collect(Collectors.toList());
+    }
+
+    public Map<LocalDate, List<Task>> getAllGroupByDate () {
+        return taskMap.values().stream()
+                .collect(Collectors.groupingBy(task -> task.getDateTime().toLocalDate()));
+    }
+
+    public Collection<Task> getRemovedTasks() {
+        return new ArrayList<>(removedTasks);
+    }
+
+    public Task updateTitle(int i, String title) {
+         taskMap.get(i).setTitle(title);
+        return taskMap.get(i);
+
+    }
+
+    public Task updateDescription(int i, String desc) {
+        taskMap.get(i).setDescription(desc);
+        return taskMap.get(i);
     }
 }

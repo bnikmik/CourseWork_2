@@ -22,7 +22,7 @@ public class Main {
                 "oneTimeTask",
                 Type.PERSONAL,
                 "сделай это",
-                LocalDateTime.of(2023, 1, 26, 19, 5)
+                LocalDateTime.of(2023, 1, 24, 19, 5)
         );
 
         MonthlyTask monthlyTask = new MonthlyTask(
@@ -35,10 +35,10 @@ public class Main {
 
         try {
             yearlyTask = new YearlyTask(
-                    "",
+                    "asd",
                     Type.PERSONAL,
                     "сделай это",
-                    LocalDateTime.of(2023, 1, 24, 13, 5)
+                    LocalDateTime.of(2023, 2, 25, 13, 5)
             );
         } catch (IncorrectArgumentException e) {
             System.out.println("Title не должен быть равен: <" + e.getMessage() +">");
@@ -50,11 +50,26 @@ public class Main {
         taskService.add(monthlyTask);
         taskService.add(yearlyTask);
 
+        System.out.println("=================");
+        System.out.println(taskService.getAllGroupByDate());
+        System.out.println("=================");
+
         try {
             System.out.println(taskService.remove(4));
         } catch (TaskNotFoundExceptions e) {
             System.out.println("Нельзя удалить! Задачи не существует! ");
         }
+
+        try {
+            System.out.println(taskService.remove(3));
+        } catch (TaskNotFoundExceptions e) {
+            System.out.println("Нельзя удалить! Задачи не существует! ");
+        }
+
+        taskService.updateDescription(1, "asd111sad");
+
+
+        System.out.println(taskService.getRemovedTasks());
 
         System.out.println(oneTimeTask.appearsIn(LocalDate.of(2023, 1, 26)));
 
