@@ -10,8 +10,6 @@ import task.YearlyTask;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-
-
 public class Main {
     public static void main(String[] args) {
         DailyTask dailyTask = new DailyTask(
@@ -43,7 +41,7 @@ public class Main {
                     LocalDateTime.of(2023, 2, 25, 13, 5)
             );
         } catch (IncorrectArgumentException e) {
-            System.out.println("Title не должен быть равен: <" + e.getMessage() +">");
+            System.out.println("Title не должен быть равен: <" + e.getMessage() + ">");
         }
 
         TaskService taskService = new TaskService();
@@ -76,7 +74,6 @@ public class Main {
         System.out.println(oneTimeTask.appearsIn(LocalDate.of(2023, 1, 26)));
 
         System.out.println(taskService.getAllByDate(LocalDate.of(2022, 1, 24)));
-
 
 
     }
