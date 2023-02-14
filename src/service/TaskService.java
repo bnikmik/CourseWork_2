@@ -17,10 +17,16 @@ public class TaskService {
         this.removedTasks = new ArrayList<>();
     }
 
+    /*/
+    add a new task
+     */
     public void add(Task task) {
         taskMap.put(task.getId(), task);
     }
 
+    /*/
+    delete a task
+     */
     public Task remove(int id) throws TaskNotFoundExceptions {
         Task task = taskMap.remove(id);
         if (task != null) {
@@ -31,6 +37,9 @@ public class TaskService {
         }
     }
 
+    /*/
+    get all the tasks in the collection
+     */
     public Collection<Task> getAllByDate(LocalDate localDate) {
         return taskMap.values()
                 .stream()
@@ -38,6 +47,9 @@ public class TaskService {
                 .collect(Collectors.toList());
     }
 
+    /*/
+    get all tasks by date
+     */
     public Map<LocalDate, Collection<Task>> getAllGroupByDate() {
         return taskMap.values().stream()
                 .collect(Collectors.toMap(task -> task.getDateTime().toLocalDate(),
@@ -50,27 +62,38 @@ public class TaskService {
                             return o1;
                         }
                 ));
-        //        return taskMap.values().stream()
-//                .collect(Collectors.groupingBy(task -> task.getDateTime().toLocalDate(),
-//                        Collectors.toCollection(ArrayList::new)));
+
     }
 
-
+    /*/
+    get all tasks by date (second version)
+     */
     public Map<LocalDate, List<Task>> getAllGroupByDate2() {
-        return taskMap.values().stream().collect(Collectors.groupingBy(task -> task.getDateTime().toLocalDate()));
+        return taskMap.values().stream()
+                .collect(Collectors.groupingBy(task -> task.getDateTime().toLocalDate(),
+                        Collectors.toCollection(ArrayList::new)));
     }
 
 
+    /*/
+    get deleted tasks
+     */
     public Collection<Task> getRemovedTasks() {
         return new ArrayList<>(removedTasks);
     }
 
+    /*/
+    update the task title
+     */
     public Task updateTitle(int i, String title) {
         taskMap.get(i).setTitle(title);
         return taskMap.get(i);
 
     }
 
+    /*/
+    update the task description
+     */
     public Task updateDescription(int i, String desc) {
         taskMap.get(i).setDescription(desc);
         return taskMap.get(i);

@@ -10,6 +10,9 @@ public class YearlyTask extends Task {
         super(title, type, description, dateTime);
     }
 
+    /*/
+    check appears date
+    */
     @Override
     public boolean appearsIn(LocalDate localDate) {
         return localDate.isEqual(getDateTime().toLocalDate())
